@@ -2,10 +2,10 @@ from influxdb import InfluxDBClient
 import pandas as pd
 from datetime import datetime
 
-HOST = "d0ymte4kaf-fffegzhdcwt67p.timestream-influxdb.ap-south-1.on.aws"  # Query endpoint
+HOST = "d0ymte4kaf-fffegzhdcwt67p.timestream-influxdb.ap-south-1.on.aws"  # Primary read/write DB endpoint
 PORT = 8181
-TOKEN = " " # it will be in the aws secrets manager
-DATABASE = "test-db"
+TOKEN = "<YOUR_API_TOKEN>"  # Replace with your actual token (store securely in AWS Secrets Manager)
+DATABASE = "test-db" # Database Name
 
 client = InfluxDBClient(
     host=HOST,
@@ -22,7 +22,7 @@ print(f"SENSOR DATA REPORT - Generated at: {datetime.now().strftime('%Y-%m-%d %H
 print("="*100)
 
 # Query 1: Total count of all data
-print("\n📊 QUERY 1: TOTAL DATA COUNT")
+print("\n QUERY 1: TOTAL DATA COUNT")
 print("-"*100)
 query_count = "SELECT COUNT(*) FROM SensorData"
 result_count = client.query(query_count)
@@ -34,7 +34,7 @@ else:
     print("No data found")
 
 # Query 2: Latest 5 records (most recent by time)
-print("\n\n📈 QUERY 2: LATEST 5 RECORDS (Most Recent)")
+print("\n\n QUERY 2: LATEST 5 RECORDS (Most Recent)")
 print("-"*100)
 query_latest = "SELECT * FROM SensorData ORDER BY time DESC LIMIT 5"
 result_latest = client.query(query_latest)
@@ -46,7 +46,7 @@ else:
     print("No data found")
 
 # Query 3: First 5 records (oldest by time)
-print("\n\n📉 QUERY 3: FIRST 5 RECORDS (Oldest)")
+print("\n\n QUERY 3: FIRST 5 RECORDS (Oldest)")
 print("-"*100)
 query_first = "SELECT * FROM SensorData ORDER BY time ASC LIMIT 5"
 result_first = client.query(query_first)
@@ -58,7 +58,7 @@ else:
     print("No data found")
 
 # Query 4: ALL DATA
-print("\n\n📦 QUERY 4: ALL DATA (Complete Dataset)")
+print("\n\n QUERY 4: ALL DATA (Complete Dataset)")
 print("-"*100)
 query_all = "SELECT * FROM SensorData"
 result_all = client.query(query_all)
@@ -74,10 +74,10 @@ if not df_all.empty:
     # Export all data to CSV
     csv_filename = f"all_sensor_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     df_all.to_csv(csv_filename, index=False)
-    print(f"\n✅ All data exported to: {csv_filename}")
+    print(f"\n All data exported to: {csv_filename}")
     
     # Show data statistics
-    print("\n📊 DATA STATISTICS:")
+    print("\n DATA STATISTICS:")
     print("-"*100)
     print(f"Date Range: {df_all['time'].min()} to {df_all['time'].max()}")
     print(f"\nRecords per sensor:")
