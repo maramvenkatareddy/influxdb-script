@@ -4,7 +4,7 @@ from datetime import datetime
 
 HOST = "d0ymte4kaf-fffegzhdcwt67p.timestream-influxdb.ap-south-1.on.aws"  # Query endpoint
 PORT = 8181
-TOKEN = " " 
+TOKEN = " " # it will be in the aws secrets manager
 DATABASE = "test-db"
 
 client = InfluxDBClient(
