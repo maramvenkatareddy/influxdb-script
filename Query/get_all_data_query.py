@@ -2,7 +2,7 @@ from influxdb import InfluxDBClient
 import pandas as pd
 from datetime import datetime
 
-HOST = "itck599okv-fffegzhdcwt67p.timestream-influxdb.ap-south-1.on.aws"  # Query endpoint
+HOST = "d0ymte4kaf-fffegzhdcwt67p.timestream-influxdb.ap-south-1.on.aws"  # Query endpoint
 PORT = 8181
 TOKEN = " " 
 DATABASE = "test-db"
