@@ -1,0 +1,4 @@
+# Install the required packages
+influxdb_client 
+pandas
+influxdb
